@@ -110,4 +110,4 @@ The manifests can be saved in a `manifests` directory.
 
 ## Monitoring
 - [ ] Create a service monitor objects for prometheus to scrape the metrics
-- [ ] Create a markdown document describing what SLO you would set for this application
+- [ ] Create a markdown document describing what SLO you would set for this applicationhi
