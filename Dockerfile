@@ -8,4 +8,9 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-reco
 
 RUN uv python install 3.12
 
-# TODO: Install the python packages and run uvicorn
+COPY . /app
+
+RUN uv sync
+
+ENV HOST="0.0.0.0" PORT="8000" LOG_CONFIG="logging.yaml"
+CMD uv run uvicorn main:api --host $HOST --port $PORT --log-config $LOG_CONFIG
