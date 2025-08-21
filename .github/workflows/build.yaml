@@ -1,10 +1,7 @@
 name: Build image
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
+  workflow_call: # temporarily disable
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
