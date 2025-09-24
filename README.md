@@ -91,7 +91,8 @@ uv run python -m pytest -v --database-location=postgres://postgres:postgres@127.
 Feel free to check these boxes in your copy along the way. If you want to leave short notes about your changes you can add them to this list also.
 
 ## Build
-- [ ] Finish the dockerfile to run this project
+- [X] Finish the dockerfile to run this project 
+  - Notes: I have added docker-compose to build and run both postgres and the service as I opted to use postgres
 - [ ] Finish the github action to build the docker image (no need to push anywhere if you don't want to)
 
 ## Test
