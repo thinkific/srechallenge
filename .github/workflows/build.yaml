@@ -60,7 +60,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
   
-  test:
+  sqlite-test:
     name: Run Unit Tests
     runs-on: ubuntu-latest
     steps:
