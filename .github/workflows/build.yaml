@@ -82,3 +82,54 @@ jobs:
 
       - name: Run tests
         run: uv run python -m pytest
+
+  postgres-test:
+    name: Run Unit Tests on Postgres
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        options: >-
+          --health-cmd="pg_isready -U postgres -d postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    env:
+      DATABASE_LOCATION: postgresql://postgres:postgres@localhost:5432/postgres
+      DATABASE_TYPE: postgres
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install uv
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Sync dependencies
+        run: uv sync --locked --no-dev
+
+      - name: Wait for Postgres to be ready
+        run: |
+          for i in {1..10}; do
+            pg_isready -h localhost -U postgres -d postgres && break
+            echo "⏳ Waiting for Postgres..."
+            sleep 2
+          done
+
+      - name: Run tests
+        run: uv run python -m pytest -v --database-location=$DATABASE_LOCATION
