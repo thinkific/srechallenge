@@ -4,16 +4,16 @@ on:
 
 jobs:
   build_and_push:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest #run on a linux machine powered by ubuntu
+    permissions:
+      id-token: write #This allows GitHub Actions job to get an OIDC token for signing.
+      contents: read
+      packages: write
 
     steps:
       - uses: actions/checkout@v4
-      - name: Log in to GHCR
-        run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
       - name: Build and push image
-        env:
-          IMAGE_NAME: ghcr.io/lisaeileen/dumbkv:latest
         run: |
-          docker build . -t $IMAGE_NAME
-          docker push $IMAGE_NAME
+          docker login --username lisaeileen --password ${{ secrets.GHCR_PAT }} ghcr.io
+          docker build . --tag ghcr.io/lisaeileen/dumbkv2:latest
+          docker push ghcr.io/lisaeileen/dumbkv:latest
