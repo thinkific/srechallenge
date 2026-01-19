@@ -1,0 +1,39 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+
+  "extends": [
+    "config:recommended",
+    "helpers:pinGitHubActionDigests",
+    "group:githubArtifactActions",
+    ":assignAndReview(@thinkific/shrek)",
+    ":docker",
+    ":timezone(America/Vancouver)"
+  ],
+
+  "rebaseWhen": "conflicted",
+  "prConcurrentLimit": 10,
+
+  "enabledManagers": [
+    "github-actions",
+    "dockerfile",
+    "pep621"
+  ],
+
+  "packageRules": [
+    {
+      // Group all Python dependencies together
+      "matchManagers": ["pep621"],
+      "groupName": "python dependencies"
+    },
+    {
+      // Pin Docker base images to digests for reproducibility
+      "matchManagers": ["dockerfile"],
+      "matchUpdateTypes": ["major"],
+      "enabled": true
+    }
+  ],
+
+  "prHeader": "This PR is part of our ongoing effort to keep our dependencies up-to-date. Please review the changes and merge with confidence.",
+
+  "semanticCommits": "enabled"
+}
