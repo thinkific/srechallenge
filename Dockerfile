@@ -1,4 +1,4 @@
-FROM ubuntu:24.10
+FROM ubuntu:oracular-20250619
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
