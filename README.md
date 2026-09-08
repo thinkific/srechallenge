@@ -6,7 +6,7 @@ You should fork or clone this repository and publish to your own github account.
 
 If you are concerned that your current github account is linked to any current employment and you do not want this activity linked, then create a new github account.
 
-If you do not have a github account, you can still complete this with GitLab, Codeberg, a self hosted Gitea instance or others, however do be aware that Thinkific uses Github and you should be familar with it.
+If you do not have a github account, you can still complete this with GitLab, Codeberg, a self hosted Gitea instance or others, however do be aware that Thinkific uses Github and you should be familiar with it.
 
 You will supply to us after you are finished:
 - The repository URL
@@ -16,7 +16,7 @@ The idea is that we should be able to see: commit history; Github actions runs; 
 
 Notes:
 - You are not expected to understand python, bugs in the application are not what you are trying to solve here.
-- You don't have to complete everything, if you can't, at least leaving enough notes of next steps in a markdown document are helpful.
+- You don't have to complete everything, if you can't, at least leaving enough notes of next steps in a markdown document is helpful.
 - Don't worry! Just try it!
 - Nobody is perfect, if you have made mistakes and they show up in the commit history this looks better than a clean slate (but it is optional, feel free to fix your commit history if you like)
 - If you run out of github actions credits for running workflows don't feel the need to pay, just make a note or leave comments on how you would implement if you cannot test the changes.
@@ -29,9 +29,9 @@ Things that aren't required but will be favourable:
 
 # DumbKV
 
-This is a KV server that you shouldn't use. It's only purpose is to create something that can be run. It doesn't store things well and doesn't do a lot of checks so it's very easy to DoS this. 
+This is a KV server that you shouldn't use. Its only purpose is to create something that can be run. It doesn't store things well and doesn't do a lot of checks so it's very easy to DoS this. 
 
-Keys are sha265 hashed, so you if you forget your key you will have to guess what it is again. The values are encrypted with the hashed key values.
+Keys are sha256 hashed, so if you forget your key you will have to guess what it is again. The values are encrypted with the hashed key values.
 
 # Running
 
@@ -47,7 +47,7 @@ Install dependencies:
 uv sync
 ```
 
-Create an `.env` file. by default using the sqlite storage:
+Create an `.env` file, by default using the sqlite storage:
 ```
 DATABASE_LOCATION=dumbkv.db
 DATABASE_TYPE=sqlite
@@ -80,7 +80,7 @@ Run pytest with:
 uv run python -m pytest
 ```
 
-By default this will use the an in memory sqlite backend. To test with postgres start pytest with the `--database-location` argument:
+By default this will use the in memory sqlite backend. To test with postgres start pytest with the `--database-location` argument:
 ```
 uv run python -m pytest -v --database-location=postgres://postgres:postgres@127.0.0.1/postgres
 ```
@@ -109,5 +109,5 @@ The manifests can be saved in a `manifests` directory.
 - [ ] Update the kubernetes manifests to support the postgres backend
 
 ## Monitoring
-- [ ] Create a service monitor objects for prometheus to scrape the metrics
+- [ ] Create a service monitor object for prometheus to scrape the metrics
 - [ ] Create a markdown document describing what SLO you would set for this application
